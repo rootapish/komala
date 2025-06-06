@@ -41,7 +41,7 @@
     user-select: none;
     z-index: 2000;
     transform: translate(-50%, -50%);
-    transition: transform 0.1s ease;
+    transition: none;
     white-space: nowrap;
   }
 
@@ -925,50 +925,88 @@
     })();
 
     const finalQuestion = document.getElementById('final-question');
-    const yesButton = document.getElementById('yes-btn');
-    const noButton = document.getElementById('no-btn');
-    const questionImage = document.getElementById('question-image');
+const yesButton = document.getElementById('yes-btn');
+const noButton = document.getElementById('no-btn');
+const questionImage = document.getElementById('question-image');
 
-    let noClickCount = 0;
+let noClickCount = 0;
+let swapped = false; // Track if buttons' functions are swapped
 
-    yesButton.addEventListener('click', () => {
-    // Transition to the new page with QR code and Yayyyy message
-    transitionToCelebrationPage();
-    });
+// Helper functions for Yes and No clicks
+function normalYesAction() {
+  transitionToCelebrationPage();
+}
 
-    noButton.addEventListener('click', () => {
-    noClickCount++;
-    if (noClickCount === 1) {
-      finalQuestion.textContent = "Are you sure?";
-      questionImage.src = "assests/images/q2.jpg"; // Update image if needed
-    } else if (noClickCount === 2) {
-      finalQuestion.textContent = "ARE YOU SURE SURE??";
-      questionImage.src = "assests/images/q3.jpg"; // Update image if needed
-    } else {
-      finalQuestion.textContent = "I knew you were joking!";
-      yesButton.textContent = "Yes"; // Change No to Yes
-      noButton.style.display = 'none'; // Hide the No button
-      questionImage.src = "assests/images/q4.jpg"; // Update image if needed
-      noClickCount = 0; // Reset counter
-    }
-    });
+function normalNoAction() {
+  noClickCount++;
+  if (noClickCount === 1) {
+    finalQuestion.textContent = "Are you sure?";
+    questionImage.src = "assests/images/q2.jpg"; // update as needed
+    swapped = true; // swap button functions from now on
+  } else if (noClickCount === 2) {
+    finalQuestion.textContent = "ARE YOU SURE SURE??";
+    questionImage.src = "assests/images/q3.jpg"; // update as needed
+  } else {
+    finalQuestion.textContent = "I knew you were joking!";
+    yesButton.textContent = "Yes"; // reset label if changed
+    noBtnNew.style.display = 'none'; // hide the *new* no button
+    questionImage.src = "assests/images/q4.jpg"; // update as needed
+    noClickCount = 0;
+    swapped = false; // reset swap for next round if applicable
+  }
+}
 
-    function transitionToCelebrationPage() {
-    const celebrationPage = document.createElement('section');
-    celebrationPage.className = 'page';
-    celebrationPage.id = 'celebration-page';
-    celebrationPage.innerHTML = `
-      <h1>Yayyyy! 🎉</h1>
-      <img src="assests/images/qr.png" alt="QR Code" style="width: 200px; height: auto;"/>
-      <p>Scan the QR code for a surprise!</p>
-    `;
-    document.querySelector('.container').appendChild(celebrationPage);
-    celebrationPage.classList.add('active');
-    celebrationPage.style.display = 'flex';
-  
-    // Hide the final wishes page
-    document.getElementById('page-5').style.display = 'none';
-    }
+function swappedYesAction() {
+  // 'Yes' acts like 'No'
+  normalNoAction();
+}
+
+function swappedNoAction() {
+  // 'No' acts like 'Yes'
+  transitionToCelebrationPage();
+}
+
+// Clear previous event listeners (if reattaching)
+yesButton.replaceWith(yesButton.cloneNode(true));
+noButton.replaceWith(noButton.cloneNode(true));
+
+const yesBtnNew = document.getElementById('yes-btn');
+const noBtnNew = document.getElementById('no-btn');
+
+function attachEventListeners() {
+  yesBtnNew.onclick = () => {
+    if (!swapped) normalYesAction();
+    else swappedYesAction();
+  };
+
+  noBtnNew.onclick = () => {
+    if (!swapped) normalNoAction();
+    else swappedNoAction();
+  };
+}
+
+// Initial attach
+attachEventListeners();
+
+// Transition to celebration page function remains unchanged
+function transitionToCelebrationPage() {
+  const celebrationPage = document.createElement('section');
+  celebrationPage.className = 'page';
+  celebrationPage.id = 'celebration-page';
+  celebrationPage.innerHTML = `
+    <h1>Yayyyy! 🎉</h1>
+    <img src="assests/images/qr.png" alt="QR Code" style="width: 200px; height: auto;"/>
+    <p>Scan the QR code for a surprise!</p>
+  `;
+  document.querySelector('.container').appendChild(celebrationPage);
+  celebrationPage.classList.add('active');
+  celebrationPage.style.display = 'flex';
+
+  // Hide the final wishes page
+  document.getElementById('page-5').style.display = 'none';
+
+  // Optionally update navigation buttons or state here
+}
 
     // Get modal elements
     const imageModal = document.getElementById('image-modal');
