@@ -1,4 +1,18 @@
 (function () {
+  const message = `HIIIIIIIII BEAUTIFUL, first of all HAPPPPYYY BIRTHDAYYYY, it's your day shine like the ever-bright star you have been in my life. I know humme mille hue zada time nhi hua hai, not even a year but still tumne jo meri life me ENTRYY maari hai it has changed my life… for the better ofcc, tumhara tokna for my bad habits, kbhi kbhi randomly itne freaky and jubilant ho jaana, the random giggles, random pitayi hehehhe and the mischievous-person behind thattt adorableeeeee smile, I love every inch of you… you are perfect the way you are… you are perfect for me… kbhi mat sochna ki me iske liye buri toh nhi cuz some DUMB log said somethings. I adore you; I respect you… I Love You!!!! Pehli meri favourite sound thi rain failing on tin roofs but mujhe kya pata tha ki ek 5'3" piddi aaegi mere jeevan me jo uski laugh meri favourite sound/song sab bana degi. Aur chapad chapad krte rha kro… bohot maza aata hai tumse baat krne me👉👈.\nYOU ARE MY FAVOURITE PERSON!!!!\nILYSSSSMMMMM XOXO`;
+
+  function typeWriterEffect(text, elementId, speed = 25) {
+    const element = document.getElementById(elementId);
+    let i = 0;
+    function type() {
+      if (i < text.length) {
+        element.textContent += text.charAt(i);
+        i++;
+        setTimeout(type, speed);
+      }
+    }
+    type();
+  }
   const customCursor = document.getElementById("custom-cursor");
   const buttons = document.querySelectorAll("button");
   let currentEmoji = "🐹";
@@ -33,6 +47,15 @@
       if (idx === index) {
         page.classList.add("active");
         if (page.style.display === "none") page.style.display = "";
+        // Trigger typewriter effect on Page 2
+        if (page.id === "page-2") {
+          const target = document.getElementById("typewriter-text");
+          if (target && !target.dataset.typed) {
+            target.textContent = ""; // clear old content
+            typeWriterEffect(message, "typewriter-text");
+            target.dataset.typed = "true"; // mark as done
+          }
+        }
       } else {
         page.classList.remove("active");
       }
@@ -91,7 +114,7 @@
 
   const gameBox = document.getElementById("game-box");
   const scoreBoard = document.getElementById("score-board");
-  const hamsterSrc = "assests/images/hamster.png";
+  const hamsterSrc = "assests/images/catchHam.png";
 
   let hamsterElement = null;
   let gameInterval = null;
@@ -493,4 +516,18 @@ modalClose.addEventListener("click", () => {
 // Close modal when clicking outside the image
 document.getElementById("modal-overlay").addEventListener("click", () => {
   imageModal.style.display = "none"; // Hide the modal
+
+  // Start typewriter when Page 2 becomes visible
+  const observer = new MutationObserver(() => {
+    const page2 = document.getElementById("page-2");
+    if (page2.classList.contains("active")) {
+      observer.disconnect(); // Run only once
+      typeWriterEffect(message, "typewriter-text");
+    }
+  });
+
+  observer.observe(document.getElementById("page-2"), {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
 });
