@@ -9,6 +9,12 @@
   --font-cursive: "Parisienne", cursive;
 }
 
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -145,13 +151,51 @@ img.couple-photo {
 #game-box {
   width: 320px;
   height: 280px;
-  border: 3px solid var(--pink);
-  border-radius: 15px;
+  /* border: 3px solid var(--pink); */
+  border-radius: 10px;
   position: relative;
   background: #fff0f6;
   box-shadow: inset 0 8px 20px rgba(184, 59, 94, 0.1);
   user-select: none;
   margin-bottom: 1.5rem;
+}
+
+#game-box::after,
+#game-box::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: conic-gradient(
+    from var(--angle),
+    var(--pink),
+    #65def1,
+    #b3001b,
+    #f0cf65,
+    #c5edac,
+    var(--pink)
+  );
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+  padding: 3px;
+  border-radius: 10px;
+  animation: 3s spin linear infinite;
+}
+
+#game-box::before {
+  filter: blur(1.5rem);
+  opacity: 0.5;
+}
+
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
 }
 
 #hamster {
