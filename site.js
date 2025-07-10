@@ -114,7 +114,7 @@
 
   const gameBox = document.getElementById("game-box");
   const scoreBoard = document.getElementById("score-board");
-  const hamsterSrc = "assests/images/catchHam.png";
+  const hamsterSrc = "assests/images/catchHam.jpg";
 
   let hamsterElement = null;
   let gameInterval = null;
