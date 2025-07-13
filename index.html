@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HAPPY BIRTHDAY ASTHAA 💖</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Custom cursor -->
+  <div id="custom-cursor" aria-hidden="true">🐹</div>
+
+  <div class="container">
+
+    <!-- Page 1: Welcome -->
+    <section class="page active" id="page-1" aria-label="Welcome Page">
+      <h1>HAPPY BIRTHDAY ASTHAAA! 💖</h1>
+      <img src="assests/images/valentines.jpg" alt="Couple photo" class="couple-photo" />
+      <p>
+        It's your day shine like the very STAR you are🌟. You light up my life every day and I'll always cherish you. <br>
+      </p>
+    </section>
+
+    <!-- Page 2: Message -->
+    <section class="page" id="page-2" aria-label="Sweet Message">
+      <h2>To My Adorable Hamstha...</h2>
+      <div class="message-box">
+        <p id="typewriter-text" style="white-space: pre-line;"></p>
+      </div>
+    </section>
+
+    <!-- New Page 3: Photo Gallery -->
+    <section class="page" id="page-3" aria-label="Photo Gallery">
+    <div id="photo-gallery" tabindex="0">
+    <h2>Asthacore</h2>
+    <div class="gallery-grid" aria-label="Photo gallery">
+      <!-- Single images -->
+      <div class="gallery-item"><img src="assests/images/lightshow.jpg" alt="Memory 1" class="gallery-img"></div>
+      <div class="gallery-item"><img src="assests/images/cutieeee.jpg" alt="Memory 2" class="gallery-img"></div>
+      <div class="gallery-item"><img src="assests/images/handnaaping.jpg" alt="Memory 3" class="gallery-img"></div>
+      <div class="gallery-item"><img src="assests/images/fireworks.jpg" alt="Memory 4" class="gallery-img"></div>
+      <div class="gallery-item"><img src="assests/images/loredropping.jpg" alt="Memory 5" class="gallery-img"></div>
+      <div class="gallery-item"><img src="assests/images/Holi.jpg" alt="Memory 6" class="gallery-img"></div>
+    </div>
+    <div class="collage" aria-label="Photo collage">
+      <!-- Collage images with different spans -->
+      <div class="collage-item span-2-row"><img src="assests/images/birthdayvali.jpg" alt="Collage 1" class="gallery-img" style="object-position: top;"></div>
+      <div class="collage-item"><img src="assests/images/bikeride.jpg" alt="Collage 2" class="gallery-img"></div>
+      <div class="collage-item span-2-row"><img src="assests/images/jij.jpg" alt="Collage 3" class="gallery-img" style="object-position: bottom;"></div>
+      <div class="collage-item"><img src="assests/images/metrotokens.jpg" alt="Collage 4" class="gallery-img"></div>
+    </div>
+    </div>
+    <!-- Modal for displaying the clicked image -->
+    <div id="image-modal" style="display: none;">
+    <div id="modal-overlay"></div>
+    <div id="modal-content">
+      <button id="modal-close">✖</button>
+      <img id="modal-image" src="" alt="Large view" />
+    </div>
+  </div>
+</section>
+
+    <!-- Page 4: Hamster Catching Game -->
+    <section class="page" id="page-4" aria-label="Hamster Catching Game">
+      <h2>Huzz's Hamster Hunt!🐹</h2>
+      <div id="score-board" aria-live="polite" aria-atomic="true">Score: 0</div>
+      <div id="game-box" role="region" aria-label="Hamster catching game area" tabindex="0"></div>
+      <p>
+        Task: Collect 10 hamsters<br>
+        Click on the hamsters that randomly appear to catch them! 
+      </p>
+    </section>
+
+      <!-- Page 5: Final Wishes -->
+      <section class="page" id="page-5" aria-label="Final Wishes" style="display:none;">
+      <h1 id="final-question">Will you be my Huzz??👉👈</h1>
+      <img id="question-image" src="assests/images/q1.jpg" alt="Question Image" />
+      <div id="response-buttons">
+      <button id="yes-btn">Yes</button>
+      <button id="no-btn">No</button>
+
+      <div id="lotus-container" aria-hidden="true">
+        <div class="lotus top-left">🪷</div>
+        <div class="lotus top-left-alt">🪷</div>
+        <div class="lotus top-right">🪷</div>
+        <div class="lotus top-right-alt">🪷</div>
+        <div class="lotus bottom-right">🪷</div>
+        <div class="lotus bottom-right-alt">🪷</div>
+        <div class="lotus bottom-left">🪷</div>
+        <div class="lotus bottom-left-alt">🪷</div>
+      </div>
+    </section>
+
+    <!-- Celebration Page -->
+  <section class="page" id="celebration-page" style="display:none;">
+    <h1>Yayyyy! 🎉</h1>
+    <img src="assests/images/qr.png" alt="QR Code" />
+    <p>Scan the QR code for a surprise!</p>
+  </section>
+
+    <nav class="nav-buttons" aria-label="Page navigation">
+      <button id="prevBtn" disabled aria-disabled="true" aria-label="Previous page">← Previous</button>
+      <button id="nextBtn" aria-label="Next page">Next →</button>
+    </nav>
+  </div>
+
+  <audio id="bg-music" src="assests/music/lostwoods-kalimba.mp3" loop autoplay></audio>
+  <button id="mute-btn" aria-label="Toggle music mute" title="Mute / Unmute music">🔈</button>
+  <canvas id="confetti-canvas"></canvas>
+
+  <script src="site.js"></script>
+</body>
+</html>
